@@ -39,17 +39,24 @@ services:
 5. Agora já estamos com o nosso container no ar e a partir deste momento podemos consultar os tópicos pelo comando: 
 ``` kafka-topics --bootstrap-server broker:9092 --list ```
 6. Agora, vamos criar o nosso tópico com o comando: 
-``` ka-topics --bootstrap-server=broker:9092 --topic=teste --create --partitions=3 --replication-factor=1```
+``` kafka-topics --bootstrap-server=broker:9092 --topic=teste --create --partitions=2 --replication-factor=1```
 7. Com o nosso tópico criado, vamos analisar o nosso tópico com o comando: 
-```ka-topics --bootstrap-server=broker:9092 --topic=test --describe```
+```kafka-topics --bootstrap-server=broker:9092 --topic=test --describe```
 
 Você pode perceber que estavamos utilizando o kafka topics, agora vamos utilizar o **kafka consumer**!
 
-1. Para analisar o tópico (apenas os eventos recebidos - novos) você pode executar o comando ```ka-console-consumer --bootstrap-server broker:9092 --topic teste``` e para analisar os eventos (historico), você poderá executar o comando ```ka-console-consumer --bootstrap-server broker:9092 --topic teste --from-beginning```
+1. Para analisar o tópico (apenas os eventos recebidos - novos) você pode executar o comando ```kafka-console-consumer --bootstrap-server broker:9092 --topic teste``` e para analisar os eventos (historico), você poderá executar o comando ```kafka-console-consumer --bootstrap-server broker:9092 --topic teste --from-beginning```
 
 ---
 
-Para executar o PRODUCER do tópico=teste: ```ka-console-producer --bootstrap-server=broker:9092 --topic=test```
+Para executar o PRODUCER do tópico=teste: ```kafka-console-producer --bootstrap-server=broker:9092 --topic=test```
 
-Para executar o CONSUMER do tópico=teste (com historico): ```ka-console-consumer --bootstrap-server broker:9092 --topic teste --from-beginning```
+Para executar o CONSUMER do tópico=teste (com historico): ```kafka-console-consumer --bootstrap-server broker:9092 --topic teste --from-beginning```
 
+---
+
+Entrando como um consumer para ler uma partição: ```kafka-console-consumer --bootstrap-server=broker:9092 --topic=teste --group=app1```
+
+Verificando as partições pelo tópico ```kafka-topics --bootstrap-server=broker:9092 --topic=teste --describe```
+
+Verificando as informações pelo consumer groups: ```kafka-consumer-groups --bootstrap-server=broker:9092 --group=app1 --describe```
